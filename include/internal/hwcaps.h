@@ -115,8 +115,8 @@ CPU_FEATURES_START_CPP_NAMESPACE
 
 
 typedef struct {
-  uint32_t hwcaps;
-  uint32_t hwcaps2;
+  unsigned long hwcaps;
+  unsigned long hwcaps2;
 } HardwareCapabilities;
 
 HardwareCapabilities GetHardwareCapabilities(void);
