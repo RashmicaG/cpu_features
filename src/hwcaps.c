@@ -15,6 +15,8 @@
 #include "internal/hwcaps.h"
 #include "cpu_features_macros.h"
 #include "internal/filesystem.h"
+#include <string.h>
+#include <stdlib.h>
 
 #if defined(NDEBUG)
 #define D(...)
@@ -71,6 +73,9 @@ static unsigned long GetElfHwcapFromGetauxval(uint32_t hwcap_type) {
 #include <dlfcn.h>
 #define AT_HWCAP 16
 #define AT_HWCAP2 26
+#define AT_PLATFORM 15
+#define AT_BASE_PLATFORM 24
+
 typedef unsigned long getauxval_func_t(unsigned long);
 
 static uint32_t GetElfHwcapFromGetauxval(uint32_t hwcap_type) {
@@ -151,6 +156,21 @@ HardwareCapabilities GetHardwareCapabilities(void) {
   return capabilities;
 }
 
+static char p[100];
+static char b_p[100];
+PlatformType GetPlatformType(void) {
+  PlatformType type;
+  char *platform = (char *)GetHardwareCapabilitiesFor(AT_PLATFORM);
+  char *base_platform = (char *)GetHardwareCapabilitiesFor(AT_BASE_PLATFORM);
+  type.platform = p;
+  type.base_platform = b_p;
+
+  if (type.platform != NULL)
+    strcpy(type.platform, platform);
+  if (type.base_platform != NULL)
+    strcpy(type.base_platform, base_platform);
+  return type;
+}
 #else  // (defined(HWCAPS_SUPPORTED)
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -16,6 +16,7 @@
 #define CPU_FEATURES_INCLUDE_CPUINFO_PPC_H_
 
 #include "cpu_features_macros.h"
+#include "internal/hwcaps.h"
 
 #define MAX_LINE_SIZE 100
 
@@ -79,6 +80,7 @@ typedef struct {
   char *model;
   char *machine;
   char *cpu;
+  PlatformType type;
 } PPCPlatformStrings;
 
 PPCPlatformStrings GetPPCPlatformStrings(void);

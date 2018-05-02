@@ -168,6 +168,7 @@ PPCPlatformStrings GetPPCPlatformStrings(void) {
   PPCPlatformStrings strings = kEmptyPPCPlatformStrings;
 
   FillProcCpuInfoData(&strings);
+  strings.type = GetPlatformType();
   return strings;
 }
 
