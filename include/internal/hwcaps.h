@@ -121,10 +121,9 @@ typedef struct {
 
 HardwareCapabilities GetHardwareCapabilities(void);
 
-
 typedef struct {
-  char *platform;
-  char *base_platform;
+  char platform[100];
+  char base_platform[100];
 } PlatformType;
 
 PlatformType GetPlatformType(void);

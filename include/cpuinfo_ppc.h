@@ -76,10 +76,10 @@ typedef struct {
 PPCInfo GetPPCInfo(void);
 
 typedef struct {
-  char *platform;
-  char *model;
-  char *machine;
-  char *cpu;
+  char platform[MAX_LINE_SIZE];
+  char model[MAX_LINE_SIZE];
+  char machine[MAX_LINE_SIZE];
+  char cpu[MAX_LINE_SIZE];
   PlatformType type;
 } PPCPlatformStrings;
 

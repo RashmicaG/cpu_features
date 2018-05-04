@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "internal/hwcaps.h"
+#include <stdlib.h>
+#include <string.h>
+
 #include "cpu_features_macros.h"
 #include "internal/filesystem.h"
-#include <string.h>
-#include <stdlib.h>
+#include "internal/hwcaps.h"
 
 #if defined(NDEBUG)
 #define D(...)
@@ -149,6 +150,7 @@ static unsigned long GetHardwareCapabilitiesFor(uint32_t type) {
   }
   return hwcaps;
 }
+
 HardwareCapabilities GetHardwareCapabilities(void) {
   HardwareCapabilities capabilities;
   capabilities.hwcaps = GetHardwareCapabilitiesFor(AT_HWCAP);
@@ -156,19 +158,15 @@ HardwareCapabilities GetHardwareCapabilities(void) {
   return capabilities;
 }
 
-static char p[100];
-static char b_p[100];
+PlatformType kEmptyPlatformType;
+
 PlatformType GetPlatformType(void) {
-  PlatformType type;
+  PlatformType type = kEmptyPlatformType;
   char *platform = (char *)GetHardwareCapabilitiesFor(AT_PLATFORM);
   char *base_platform = (char *)GetHardwareCapabilitiesFor(AT_BASE_PLATFORM);
-  type.platform = p;
-  type.base_platform = b_p;
 
-  if (type.platform != NULL)
-    strcpy(type.platform, platform);
-  if (type.base_platform != NULL)
-    strcpy(type.base_platform, base_platform);
+  if (platform != NULL) strcpy(type.platform, platform);
+  if (base_platform != NULL) strcpy(type.base_platform, base_platform);
   return type;
 }
 #else  // (defined(HWCAPS_SUPPORTED)

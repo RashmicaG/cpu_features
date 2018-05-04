@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "cpuinfo_ppc.h"
-#include "internal/bit_utils.h"
-
 #include <stdbool.h>
 #include <string.h>
+
+#include "cpuinfo_ppc.h"
+#include "internal/bit_utils.h"
 #include "internal/filesystem.h"
 #include "internal/linux_features_aggregator.h"
 #include "internal/stack_line_reader.h"
@@ -147,7 +147,7 @@ static const PPCInfo kEmptyPPCInfo;
 PPCInfo GetPPCInfo(void) {
   /*
    * On Power feature flags aren't currently in cpuinfo so we only look at
-   * the auxilary vector
+   * the auxilary vector.
    */
   PPCInfo info = kEmptyPPCInfo;
 
@@ -156,13 +156,7 @@ PPCInfo GetPPCInfo(void) {
   return info;
 }
 
-
-static char platform[MAX_LINE_SIZE];
-static char model[MAX_LINE_SIZE];
-static char machine[MAX_LINE_SIZE];
-static char cpu[MAX_LINE_SIZE];
-static const PPCPlatformStrings kEmptyPPCPlatformStrings = {
-	.platform = platform, .model = model, .machine = machine, .cpu = cpu};
+static const PPCPlatformStrings kEmptyPPCPlatformStrings;
 
 PPCPlatformStrings GetPPCPlatformStrings(void) {
   PPCPlatformStrings strings = kEmptyPPCPlatformStrings;

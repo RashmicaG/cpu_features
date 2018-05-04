@@ -12,14 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "hwcaps_for_testing.h"
 #include <string.h>
+
+#include "hwcaps_for_testing.h"
 
 namespace cpu_features {
 
 namespace {
-static char p[100];
-static char b_p[100];
 static auto* const g_hardware_capabilities = new HardwareCapabilities();
 static auto* const g_platform_types = new PlatformType();
 }  // namespace
@@ -33,17 +32,10 @@ HardwareCapabilities GetHardwareCapabilities(void) {
   return *g_hardware_capabilities;
 }
 
-void SetPlatformTypes(const char *platform, const char *base_platform) {
-    g_platform_types->platform = p;
-    g_platform_types->base_platform = b_p;
-
-    if (g_platform_types->platform != NULL)
-        strcpy(g_platform_types->platform, platform);
-    if (g_platform_types->base_platform != NULL)
-        strcpy(g_platform_types->base_platform, base_platform);
+void SetPlatformTypes(const char* platform, const char* base_platform) {
+  strcpy(g_platform_types->platform, platform);
+  strcpy(g_platform_types->base_platform, base_platform);
 }
 
-PlatformType GetPlatformType(void) {
-  return *g_platform_types;
-}
+PlatformType GetPlatformType(void) { return *g_platform_types; }
 }  // namespace cpu_features
