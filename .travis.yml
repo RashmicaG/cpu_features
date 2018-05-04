@@ -28,6 +28,16 @@ matrix:
     env:
       TOOLCHAIN=NATIVE
       TARGET=native
+  - os: linux-ppc64le
+    compiler: gcc
+    env:
+      TOOLCHAIN=NATIVE
+      TARGET=native
+  - os: linux-ppc64le
+    compiler: clang
+    env:
+      TOOLCHAIN=NATIVE
+      TARGET=native
   # Toolchains for little-endian, 64-bit ARMv8 for GNU/Linux systems
   - os: linux
     env:
@@ -75,6 +85,17 @@ matrix:
       TOOLCHAIN=CODESCAPE
       TARGET=mips-mti-linux-gnu
       QEMU_ARCH=DISABLED
+  # Powerpc 
+  - os: linux
+    compiler: powerpc64-linux-gnu-gcc
+    env:
+      TOOLCHAIN=NATIVE
+      TARGET=powerpc64-linux-gnu
+  - os: linux
+    compiler: powerpc64le-linux-gnu-gcc
+    env:
+      TOOLCHAIN=NATIVE
+      TARGET=powerpc64le-linux-gnu
 
 script:
   - cmake --version
